@@ -1,0 +1,41 @@
+spring:
+  application:
+        name: lcc-invoice-generation-microservice
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/db-name
+    username: username
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+          ddl-auto: update
+          
+# config:
+#    import: "optional:configserver:http://localhost:port-number"
+
+camunda.bpm:
+  admin-user:
+    id: demo
+    password: demo
+
+
+
+  client:
+    base-url: http://localhost:8080/engine-rest # The URL pointing to the Camunda Platform Runtime REST API
+    async-response-timeout: 100 # Defines the maximum duration of the long-polling request
+    worker-id: spring-boot-invoice-task-client # Identifies the worker towards the Engine
+    #      basic-auth: # Configure if REST API is secured with basic authentication
+    #        username: my-username
+    #        password: my-password
+    subscriptions:
+      GenerateInvoice: # This topic name must match the respective `@ExternalTaskSubscription`
+        process-definition-key: invoice_generation # Filters for External Tasks of this key
+        variable-names: identityCard, feeType, propertyNum
+        auto-open: true # Defines whether the subscription is opened automatically or not
+server:
+  port: 8081
+
+
+

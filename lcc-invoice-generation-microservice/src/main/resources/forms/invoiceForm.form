@@ -1,0 +1,52 @@
+{
+  "components": [
+    {
+      "label": "Tpin or Nrc",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1h2o8bg",
+        "columns": null
+      },
+      "id": "Field_00bl478",
+      "key": "identityCard",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Service Type",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0sxkogn",
+        "columns": null
+      },
+      "id": "Field_1n9gtku",
+      "key": "feeType",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Property Id",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1j871bv",
+        "columns": null
+      },
+      "id": "Field_0m87mjd",
+      "key": "propertyNum",
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "type": "default",
+  "id": "invoiceForm",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.20.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.20.0",
+  "schemaVersion": 15
+}
