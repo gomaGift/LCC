@@ -1,0 +1,21 @@
+spring:
+  application:
+        name: Payroll-Batch-Service
+
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/mydatabase
+    username: root
+    password: goma
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+
+  batch:
+    job:
+      enabled: false
+    jdbc:
+      initialize-schema: always
