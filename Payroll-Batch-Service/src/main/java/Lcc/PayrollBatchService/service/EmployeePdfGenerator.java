@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class EmployeePdfGenerator {
-    public static ByteArrayInputStream generate(List<Employee> listOfEmployees) throws IOException {
-        Document document = new Document();
+    public static ByteArrayInputStream generate(List<Employee> employeeList) throws IOException {
+        Document document = new Document(PageSize.A4);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         try {
@@ -24,63 +24,45 @@ public class EmployeePdfGenerator {
             PdfWriter.getInstance(document, out);
             document.open();
 
-            // Add Content to PDF file ->
-            Font fontHeader = FontFactory.getFont(FontFactory.TIMES_BOLD, 22);
-            Paragraph para = new Paragraph("Employee Payroll", fontHeader);
-            para.setAlignment(Element.ALIGN_CENTER);
-            document.add(para);
-            document.add(Chunk.NEWLINE);
 
+                    Font fontTitle = FontFactory.getFont(FontFactory.TIMES_ROMAN);
+            fontTitle.setSize(20);
+            Paragraph paragraph1 = new Paragraph("Employee Payroll", fontTitle);
+            paragraph1.setAlignment(Paragraph.ALIGN_CENTER);
+            document.add(paragraph1);
             PdfPTable table = new PdfPTable(4);
-            // Add PDF Table Header ->
-            Stream.of("ID", "Department", "Position", "Salary").forEach(headerTitle -> {
-                PdfPCell header = new PdfPCell();
-                Font headFont = FontFactory.getFont(FontFactory.TIMES_BOLD);
-                header.setBackgroundColor(Color.LIGHT_GRAY);
-                header.setHorizontalAlignment(Element.ALIGN_CENTER);
-                header.setBorderWidth(1);
-                header.setPhrase(new Phrase(headerTitle, headFont));
-                table.addCell(header);
-            });
+            table.setWidthPercentage(100f);
+            table.setWidths(new int[] {5,5,5,5});
+            table.setSpacingBefore(5);
+            PdfPCell cell = new PdfPCell();
+            cell.setBackgroundColor(Color.LIGHT_GRAY);
+            cell.setPadding(5);
+        
 
-            for (Employee employee : listOfEmployees) {
-                PdfPCell idCell = new PdfPCell(new Phrase(String.valueOf(employee.getId())));
-                idCell.setPaddingLeft(6);
-                idCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                idCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                table.addCell(idCell);
-//
-//                PdfPCell firstNameCell = new PdfPCell(new Phrase(employee.getFirstname()));
-//                firstNameCell.setPaddingLeft(6);
-//                firstNameCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-//                firstNameCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-//                table.addCell(firstNameCell);
-//
-//                PdfPCell lastnameCell = new PdfPCell(new Phrase(employee.getLastname()));
-//                lastnameCell.setPaddingLeft(4);
-//                lastnameCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-//                lastnameCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-//                table.addCell(lastnameCell);
+            Font font = FontFactory.getFont(FontFactory.TIMES_ROMAN);
+            font.setColor(Color.WHITE);
+            
 
-                PdfPCell departmentCell = new PdfPCell(new Phrase(employee.getDepartment()));
-                departmentCell.setPaddingLeft(6);
-                departmentCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                departmentCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                table.addCell(departmentCell);
+            cell.setPhrase(new Phrase("ID", font));
+            table.addCell(cell);
+            cell.setPhrase(new Phrase("Department", font));
+            table.addCell(cell);
+            cell.setPhrase(new Phrase("Position", font));
+            table.addCell(cell);
+            cell.setPhrase(new Phrase("Salary", font));
+            table.addCell(cell);
 
-                PdfPCell positionCell = new PdfPCell(new Phrase(String.valueOf(employee.getPosition())));
-                positionCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                positionCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                positionCell.setPaddingRight(6);
-                table.addCell(positionCell);
+            for (Employee employee: employeeList) {
 
-                PdfPCell salaryCell = new PdfPCell(new Phrase(String.valueOf(employee.getSalary())));
-                salaryCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                salaryCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                salaryCell.setPaddingRight(6);
-                table.addCell(salaryCell);
-
+            table.addCell(String.valueOf(employee.getId()));
+            
+            table.addCell(employee.getDepartment());
+            
+            table.addCell(employee.getPosition());
+            
+            table.addCell(String.valueOf(employee.getSalary()));
             }
+
             document.add(table);
 
             document.close();
@@ -90,6 +72,7 @@ public class EmployeePdfGenerator {
 
         return new ByteArrayInputStream(out.toByteArray());
     }
+
 }
 
 

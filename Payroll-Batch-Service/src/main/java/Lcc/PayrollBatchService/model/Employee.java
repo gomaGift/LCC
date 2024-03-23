@@ -1,5 +1,6 @@
 package Lcc.PayrollBatchService.model;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
 
