@@ -48,11 +48,11 @@ public class EmployeeController {
     @GetMapping(value = "/export-to-pdf", produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<InputStreamResource> employeeReport()  throws IOException {
         List<Employee> employees = employeeService.getAllEmployees();
-        ByteArrayInputStream bis = EmployeePdfGenerator.generate(employees);
+        ByteArrayInputStream employeePdf = EmployeePdfGenerator.generate(employees);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "inline; filename=employees.pdf");
 
         return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
-                .body(new InputStreamResource(bis));
+                .body(new InputStreamResource(employeePdf));
     }
 }
