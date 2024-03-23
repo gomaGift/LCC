@@ -1,12 +1,24 @@
 package Lcc.PayrollBatchService.controller;
 
 import Lcc.PayrollBatchService.model.Employee;
+import Lcc.PayrollBatchService.service.EmployeePdfGenerator;
 import Lcc.PayrollBatchService.service.EmployeeService;
+import com.lowagie.text.DocumentException;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -32,6 +44,15 @@ public class EmployeeController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee not found");
 
 
+    }
+    @GetMapping(value = "/export-to-pdf", produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> employeeReport()  throws IOException {
+        List<Employee> employees = employeeService.getAllEmployees();
+        ByteArrayInputStream bis = EmployeePdfGenerator.generate(employees);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=employees.pdf");
 
+        return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(bis));
     }
 }

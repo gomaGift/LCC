@@ -4,9 +4,9 @@ spring:
 
 
   datasource:
-    url: jdbc:mysql://localhost:3306/db-name
-    username: username
-    password: password
+    url: jdbc:mysql://localhost:3306/mydatabase
+    username: root
+    password: goma
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
