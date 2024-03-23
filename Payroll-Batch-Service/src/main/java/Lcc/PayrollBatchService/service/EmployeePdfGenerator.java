@@ -12,7 +12,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class EmployeePdfGenerator {
     public static ByteArrayInputStream generate(List<Employee> employeeList) throws IOException {
@@ -40,10 +39,10 @@ public class EmployeePdfGenerator {
         
 
             Font font = FontFactory.getFont(FontFactory.TIMES_ROMAN);
-            font.setColor(Color.WHITE);
+            
             
 
-            cell.setPhrase(new Phrase("ID", font));
+            cell.setPhrase(new Phrase("ID", font) );
             table.addCell(cell);
             cell.setPhrase(new Phrase("Department", font));
             table.addCell(cell);
