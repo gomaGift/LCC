@@ -26,7 +26,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Component("pdfGenerator")
 public class EmployeeReportPDFGenerator {
 
-    
+    // config values specified in application.yml file
 
     @Value("${pdfDir}")
     private String pdfDir;
