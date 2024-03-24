@@ -1,24 +1,19 @@
 package Lcc.PayrollBatchService.batch;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import Lcc.PayrollBatchService.model.Employee;
 import Lcc.PayrollBatchService.service.EmployeeService;
+import com.itextpdf.text.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 
-import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -46,6 +41,12 @@ public class EmployeeReportPDFGenerator {
     @Value("${table_noOfColumns}")
     private int noOfColumns;
 
+    @Value("${logoImgPath}")
+    private String logoImgPath;
+
+    @Value("${logoImgScale}")
+    private Float[] logoImgScale;
+
     @Value("${table.columnNames}")
     private List<String> columnNames;
 
@@ -62,6 +63,7 @@ public class EmployeeReportPDFGenerator {
         try {
             PdfWriter.getInstance(document, new FileOutputStream(getPdfNameWithDate()));
             document.open();
+            addLogo(document);
             addDocTitle(document);
             createTable(document,noOfColumns);
             addFooter(document);
@@ -69,6 +71,18 @@ public class EmployeeReportPDFGenerator {
             System.out.println("------------------Your PDF Report is ready!-------------------------");
 
         } catch (FileNotFoundException | DocumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    private void addLogo(Document document) {
+        try {
+            Image img = Image.getInstance("src/main/resources/static/img/lsk_council.png");
+            img.scalePercent(logoImgScale[0], logoImgScale[1]);
+            img.setAlignment(Element.ALIGN_RIGHT);
+            document.add(img);
+        } catch (DocumentException | IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
