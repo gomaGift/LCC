@@ -30,7 +30,7 @@ public class SchedulerConfig {
     private final JobLauncher jobLauncher;
 
 
-    @Scheduled(fixedDelay = 10000, initialDelay = 2000)
+    @Scheduled(cron = "0 0 0 15 * *")
     public void scheduleJob() throws Exception {
         log.info("Job Started");
         jobLauncher
