@@ -19,3 +19,13 @@ spring:
       enabled: false
     jdbc:
       initialize-schema: always
+
+  #------------PDF Genration properties---------------------
+
+pdfDir: C:\Users\Goma\Downloads\
+reportFileName: employee-Report
+reportFileNameDateFormat: dd_MMMM_yyyy_HH_mm_ss
+localDateFormat: "dd MMMM yyyy HH:mm:ss"
+currencySymbol: K
+table_noOfColumns: 4
+table.columnNames: Emp Id,Emp Name,Emp Dept,Emp Sal

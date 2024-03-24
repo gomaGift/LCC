@@ -12,7 +12,7 @@ public class EmployeeProcessor implements ItemProcessor<Employee, Employee> {
     // Do processing here
     @Override
     public Employee process(Employee employee) throws Exception {
-        employee.setSalary(employee.getSalary() * 2);
+        employee.setSalary(employee.getSalary() * 0.1 + employee.getSalary());
         log.info("employee id {}, salary {}", employee.getId(), employee.getSalary());
         return employee;
     }

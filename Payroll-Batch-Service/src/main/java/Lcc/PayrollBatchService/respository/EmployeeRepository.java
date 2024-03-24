@@ -1,7 +1,6 @@
 package Lcc.PayrollBatchService.respository;
 
 import Lcc.PayrollBatchService.model.Employee;
-import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
