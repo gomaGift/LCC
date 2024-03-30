@@ -1,2 +1,5 @@
-package Lcc.PayrollBatchService.service;public interface PensionService {
+package Lcc.PayrollBatchService.service;
+
+public interface PensionService {
+    double findEmployeePercentageByPensionType(String pensionType);
 }

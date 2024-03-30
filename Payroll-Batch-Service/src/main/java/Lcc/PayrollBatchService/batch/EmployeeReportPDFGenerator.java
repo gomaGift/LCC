@@ -78,10 +78,12 @@ public class EmployeeReportPDFGenerator {
 
     private void addLogo(Document document) {
         try {
+
             Image img = Image.getInstance("src/main/resources/static/img/lsk_council.png");
             img.scalePercent(logoImgScale[0], logoImgScale[1]);
             img.setAlignment(Element.ALIGN_RIGHT);
             document.add(img);
+            
         } catch (DocumentException | IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -104,7 +106,7 @@ public class EmployeeReportPDFGenerator {
         document.add(paragraph);
         PdfPTable table = new PdfPTable(noOfColumns);
 
-        for(int i=0; i<noOfColumns; i++) {
+        for(int i=0; i< noOfColumns; i++) {
             PdfPCell cell = new PdfPCell(new Phrase(columnNames.get(i)));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell.setBackgroundColor(BaseColor.CYAN);
@@ -125,10 +127,10 @@ public class EmployeeReportPDFGenerator {
             table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
             table.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
 
-            table.addCell(employee.getId().toString());
-            table.addCell(employee.getDepartment());
-            table.addCell(employee.getPosition());
-            table.addCell(currencySymbol + employee.getSalary());
+            table.addCell(employee.getEmployeeId().toString());
+            table.addCell(employee.getPosition().getDepartment());
+            table.addCell(employee.getPosition().getPosition());
+            table.addCell(currencySymbol + employee.getPosition().getSalaryScale().getBasicSalary());
 
         }
 

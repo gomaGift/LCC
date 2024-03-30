@@ -1,25 +1,27 @@
 package Lcc.PayrollBatchService.model;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapsId;
+import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDate;
 
-public class EmployeeOtherDeductions {
+@Entity
+@Data
+public class EmployeeOtherDeduction {
 
     @EmbeddedId
-    private OtherDeductionsCompositeKey id;
+    private EmpOtherDeductionsCompositeKey id;
     @ManyToOne
     @MapsId("employeeId")
+    @JoinColumn(name = "employee_id")
     private Employee employee;
 
     @ManyToOne
     @MapsId("otherDeductionsType")
+    @JoinColumn(name = "deduction_type")
     private OtherDeduction otherDeduction;
 
-    private LocalDate dateStarted = LocalDate.now();
+    private String dateStarted;
 
-    private LocalDate dateEnd;
-
+    private String dateEnd;
 }

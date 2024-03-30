@@ -1,2 +1,11 @@
-package Lcc.PayrollBatchService.service;public interface EmployeeInsuranceService {
+package Lcc.PayrollBatchService.service;
+
+import Lcc.PayrollBatchService.model.Insurance;
+
+import java.util.List;
+
+public interface EmployeeInsuranceService {
+
+
+    List<String> findInsuranceTypeByEmployeeId(String empId);
 }

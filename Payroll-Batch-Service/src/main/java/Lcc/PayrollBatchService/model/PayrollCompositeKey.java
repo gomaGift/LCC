@@ -1,2 +1,23 @@
-package Lcc.PayrollBatchService.model;public class PayrollCompositeKey {
+package Lcc.PayrollBatchService.model;
+
+import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
+
+
+@Embeddable
+@Data
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
+public class PayrollCompositeKey implements Serializable {
+
+    private String employeeId;
+    private String paymentDate;
+
 }

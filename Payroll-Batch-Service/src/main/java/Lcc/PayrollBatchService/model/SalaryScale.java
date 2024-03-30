@@ -9,11 +9,11 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-public class Salary_Scale {
+public class SalaryScale {
 
     @Id
     private String salaryScale;
     private LocalDate dateFrom;
     private LocalDate dateTo;
-    private BigDecimal basicSalary;
+    private double basicSalary;
 }
