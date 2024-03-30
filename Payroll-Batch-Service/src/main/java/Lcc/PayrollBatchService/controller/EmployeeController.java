@@ -2,9 +2,8 @@ package Lcc.PayrollBatchService.controller;
 
 import Lcc.PayrollBatchService.model.Employee;
 import Lcc.PayrollBatchService.service.EmployeeService;
-import com.lowagie.text.DocumentException;
-import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,19 +17,19 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/employees")
-@RequiredArgsConstructor
-public class EmployeeController {
 
-    private final EmployeeService employeeService;
+public class EmployeeController {
+    @Autowired
+    private  EmployeeService employeeService;
 
     @GetMapping("/employee/{employeeId}/process")
-    public ResponseEntity<String> processEmployee(@PathVariable Long employeeId){
+    public ResponseEntity<String> processEmployee(@PathVariable String employeeId){
         Optional<Employee> employee = employeeService.findById(employeeId);
 
         // employee processing e.g salary increment
         if (employee.isPresent()){
             Employee employee1 = employee.get();
-            employee1.setSalary(employee1.getSalary() * 2);
+//            employee1.setSalary(employee1.getSalary() * 2);
             employeeService.save(employee1);
             return ResponseEntity.ok("Employee Process successfully");
         }

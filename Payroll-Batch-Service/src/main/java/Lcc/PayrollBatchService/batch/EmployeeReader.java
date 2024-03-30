@@ -1,6 +1,8 @@
 package Lcc.PayrollBatchService.batch;
 
 import Lcc.PayrollBatchService.model.Employee;
+import Lcc.PayrollBatchService.model.EmployeeOnPayroll;
+import Lcc.PayrollBatchService.service.EmployeeOnPayrollService;
 import Lcc.PayrollBatchService.service.EmployeeService;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.NonTransientResourceException;
@@ -12,19 +14,19 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class EmployeeReader implements ItemReader<Employee> {
+public class EmployeeReader implements ItemReader<EmployeeOnPayroll> {
 
     @Autowired
-    private EmployeeService employeeService;
-    private List<Employee> employeeList;
+    private EmployeeOnPayrollService employeeOnPayrollService;
+    private List<EmployeeOnPayroll> employeeList;
     private int employeeIdx = 0;
 
     @Override
-    public Employee read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
+    public EmployeeOnPayroll read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
              if (employeeList == null){
-                 employeeList = employeeService.getAllEmployees();
+                 employeeList = employeeOnPayrollService.getAllEmployees();
              }
-             Employee employee = null;
+             EmployeeOnPayroll employee = null;
              if (employeeIdx < employeeList.size()){
                  employee = employeeList.get(employeeIdx++);
              }

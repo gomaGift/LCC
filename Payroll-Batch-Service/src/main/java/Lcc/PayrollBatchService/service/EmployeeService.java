@@ -1,6 +1,7 @@
 package Lcc.PayrollBatchService.service;
 
 import Lcc.PayrollBatchService.model.Employee;
+import Lcc.PayrollBatchService.model.Position;
 import org.springframework.batch.item.Chunk;
 
 import java.util.List;
@@ -11,9 +12,11 @@ public interface EmployeeService {
 
  
 
-    Optional<Employee> findById(Long employeeId);
+    Optional<Employee> findById(String employeeId);
 
     void saveAll(Chunk<? extends Employee> chunk);
 
     void save(Employee employee1);
+
+    Position findPositionByEmployeeId(String empId);
 }

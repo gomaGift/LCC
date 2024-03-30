@@ -1,0 +1,21 @@
+package Lcc.PayrollBatchService.model;
+
+import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.util.Objects;
+
+@Embeddable
+@Data
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
+public class EmpInsuranceCompositeKey implements Serializable {
+     private String employeeId;
+     private String insuranceType;
+
+}

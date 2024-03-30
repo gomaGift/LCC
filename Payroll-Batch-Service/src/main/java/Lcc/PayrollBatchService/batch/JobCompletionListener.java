@@ -15,7 +15,7 @@ public class JobCompletionListener implements JobExecutionListener {
     }
     @Override
     public void afterJob(JobExecution jobExecution) {
-        pdfGenerator.generatePdfReport();
+//        pdfGenerator.generatePdfReport();
         System.out.println("Job Completed: " + jobExecution.getJobInstance().getJobName());
         // You can add additional logic here, such as sending notifications or logging job completion status.
     }

@@ -1,6 +1,7 @@
 package Lcc.PayrollBatchService.service.implementation;
 
 import Lcc.PayrollBatchService.model.Employee;
+import Lcc.PayrollBatchService.model.Position;
 import Lcc.PayrollBatchService.respository.EmployeeRepository;
 import Lcc.PayrollBatchService.service.EmployeeService;
 import org.springframework.batch.item.Chunk;
@@ -31,7 +32,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Optional<Employee> findById(Long employeeId) {
+    public Position findPositionByEmployeeId(String empId) {
+        return employeeRepository.findPositionByEmployeeId(empId);
+    }
+
+    @Override
+    public Optional<Employee> findById(String employeeId) {
         return employeeRepository.findById(employeeId);
     }
 }
