@@ -49,8 +49,8 @@ public class PayrollHtmlPdfConverter {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
             helper.setSubject("Employee payroll");
-            helper.setFrom("gomagiftk01@gmail.com");
-            helper.setTo("mayumbo@gmail.com");
+            helper.setFrom("");
+            helper.setTo("");
             helper.setText("Please find the attached employee payroll.");
 
             DataSource dataSource = new ByteArrayDataSource(bytes, "application/pdf");
