@@ -3,11 +3,9 @@ package Lcc.PayrollBatchService.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -21,7 +19,7 @@ public class EmployeeOnPayroll {
     private LocalDate dateEnd;
     private boolean active;
 
-    private EmployeeOnPayroll(String employeeId){
+    public EmployeeOnPayroll(String employeeId){
         this.employeeId = employeeId;
         dateStarted = LocalDate.now();
         active = true;

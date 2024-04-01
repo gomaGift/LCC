@@ -20,6 +20,19 @@ spring:
     jdbc:
       initialize-schema: always
 
+
+    # employee payroll pdf mail sender
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: gomagiftk01
+    password: yafqbckbjmqinxlu
+    properties:
+      mail.smtp:
+        auth: true
+        starttls.enable: true
+
   #------------PDF Genration properties---------------------
 
 # specify the destination of the pdf 
@@ -32,3 +45,5 @@ logoImgScale: 50,50
 currencySymbol: K
 table_noOfColumns: 4
 table.columnNames: Emp Id,Emp Name,Emp Dept,Emp Sal
+
+

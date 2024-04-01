@@ -12,13 +12,12 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import java.io.ByteArrayOutputStream;
 
-
 import com.itextpdf.html2pdf.resolver.font.DefaultFontProvider;
 
 
 @Service
 @RequiredArgsConstructor
-public class PayrollPDfGenerator {
+public class PayrollHtmlPdfConverter {
 
     private final JavaMailSender mailSender;
     public void htmlToPdf(String processedHtml) {
@@ -35,27 +34,34 @@ public class PayrollPDfGenerator {
             HtmlConverter.convertToPdf(processedHtml, pdfWriter, converterProperties);
 
             byte[] pdfBytes = byteArrayOutputStream.toByteArray();
+            sendMail(pdfBytes);
 
-            try {
-
-                MimeMessage message = mailSender.createMimeMessage();
-                MimeMessageHelper helper = new MimeMessageHelper(message, true);
-                helper.setSubject("Employee payroll");
-                helper.setFrom("gomagiftk01@gmail.com");
-                helper.setTo("giftian.kg@gmail.com");
-                helper.setText("Please find the attached PDF document.");
-
-                DataSource dataSource = new ByteArrayDataSource(pdfBytes, "application.pdf");
-                helper.addAttachment("Employee Payroll", dataSource);
-                mailSender.send(message);
-            } catch (Exception exception) {
-                System.out.println(exception.getMessage());
-                throw new RuntimeException(exception.getMessage());
-            }
-            
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    private void sendMail(byte[] bytes){
+
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+            helper.setSubject("Employee payroll");
+            helper.setFrom("gomagiftk01@gmail.com");
+            helper.setTo("mayumbo@gmail.com");
+            helper.setText("Please find the attached employee payroll.");
+
+            DataSource dataSource = new ByteArrayDataSource(bytes, "application/pdf");
+            helper.addAttachment("Employee Payroll", dataSource);
+
+            mailSender.send(message);
+
+        }
+        catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            throw new RuntimeException(exception.getMessage());
         }
     }
 }

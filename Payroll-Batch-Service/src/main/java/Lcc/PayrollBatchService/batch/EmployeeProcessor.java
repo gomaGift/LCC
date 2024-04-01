@@ -4,18 +4,15 @@ import Lcc.PayrollBatchService.model.*;
 import Lcc.PayrollBatchService.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.item.ItemProcessor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class EmployeeProcessor implements ItemProcessor<EmployeeOnPayroll, EmployeeOnPayroll> {
+public class EmployeeProcessor implements ItemProcessor<EmployeeOnPayroll, Payroll> {
 
     private final EmployeeService employeeService;
     private final EmployeePensionService employeePensionService;
@@ -27,7 +24,7 @@ public class EmployeeProcessor implements ItemProcessor<EmployeeOnPayroll, Emplo
     private final PayrollService payrollService;
     // Do processing here
     @Override
-    public EmployeeOnPayroll process(EmployeeOnPayroll employee) throws Exception {
+    public Payroll process(EmployeeOnPayroll employee) throws Exception {
 
         String empId = employee.getEmployeeId();
         System.out.println("Processing employee with: " + empId);
@@ -79,6 +76,7 @@ public class EmployeeProcessor implements ItemProcessor<EmployeeOnPayroll, Emplo
 
 
         System.out.println(pensionType +  " " + pensionDeduction);
+
         // insurance deductions
         List<String> insuranceList = employeeInsuranceService.findInsuranceTypeByEmployeeId(empId);
         double insuranceDeductions = 0;
@@ -108,21 +106,22 @@ public class EmployeeProcessor implements ItemProcessor<EmployeeOnPayroll, Emplo
             employeePayrollDeductionService.add(new EmployeePayrollDeduction(compositeKey,percentDeduction,deductAmount));
         }
         // net salary
-        double netPay = grossSalary + insuranceDeductions + otherDeductions + pensionDeduction;
-        PayrollCompositeKey key = new PayrollCompositeKey(empId, date);
-        payrollService.save(new Payroll(key, basicSalary, housingAllowance,educationAllowance, transportAllowance, fuelAllowance, riskAllowance,netPay,grossSalary));
-        System.out.println("netpay: " + netPay);
-        return employee;
+        double totalDeductions = insuranceDeductions + otherDeductions + pensionDeduction;
+        double netPay = grossSalary + totalDeductions;
 
+
+        PayrollCompositeKey key = new PayrollCompositeKey(empId, date);
+        Payroll payroll = new  Payroll(key, basicSalary, housingAllowance,educationAllowance, transportAllowance, fuelAllowance, riskAllowance,totalDeductions,netPay,grossSalary);
+        System.out.println("netpay: " + netPay);
+        return payroll;
 
 
     }
-        private String formatDate(){
+        public static String formatDate(){
         LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-dd-yyy");
         return date.format(formatter);
     }
-
 
 
     }
