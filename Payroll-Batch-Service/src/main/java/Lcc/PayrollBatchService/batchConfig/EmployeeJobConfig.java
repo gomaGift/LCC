@@ -6,6 +6,7 @@ import Lcc.PayrollBatchService.batch.EmployeeWriter;
 import Lcc.PayrollBatchService.batch.JobCompletionListener;
 import Lcc.PayrollBatchService.model.Employee;
 import Lcc.PayrollBatchService.model.EmployeeOnPayroll;
+import Lcc.PayrollBatchService.model.Payroll;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.job.builder.JobBuilder;
@@ -40,7 +41,7 @@ public class EmployeeJobConfig {
     }
     @Bean
     public Step chunkStep(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
-        return new StepBuilder("employPayrollProcess1", jobRepository).<EmployeeOnPayroll, EmployeeOnPayroll>
+        return new StepBuilder("employPayrollProcess1", jobRepository).<EmployeeOnPayroll, Payroll>
                 chunk(10, transactionManager)
                 .reader(employeeReader)
                 .processor(employeeProcessor)

@@ -6,17 +6,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmployeePayrollDeduction {
+    
     @EmbeddedId
     private EmpDeductionCompositeKey key;
     private double percentageDeduction = 0;
     private double amount;
-
 
 }

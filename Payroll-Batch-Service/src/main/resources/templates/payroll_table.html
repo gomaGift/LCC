@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table class="payroll_table">
+    <thead>
+    <tr>
+        <th>EmpID</th>
+        <th>Payment Date</th>
+        <th>Basic Salary</th>
+        <th>Gross Salary</th>
+        <th>Deductions</th>
+        <th>Net Salary</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="entry: ${payroll}">
+        <td th:text="${entry.key.employeeId}"></td>
+        <td th:text="${entry.key.paymentDate}"></td>
+        <td th:text="${entry.basicSalary}"></td>
+        <td th:text="${entry.grossPay}"></td>
+        <td th:text="${entry.totalDeductions}"></td>
+        <td th:text="${entry.netPay}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -20,15 +20,30 @@ spring:
     jdbc:
       initialize-schema: always
 
-  #------------PDF Genration properties---------------------
 
-# specify the destination of the pdf 
-pdfDir: C:\Users\Goma\Downloads\ 
-reportFileName: employee-Report
-reportFileNameDateFormat: dd_MMMM_yyyy_HH_mm_ss
-localDateFormat: "dd MMMM yyyy HH:mm:ss"
-logoImgPath: C:\Users\Goma\Downloads\lsk_council.png
-logoImgScale: 50,50
-currencySymbol: K
-table_noOfColumns: 4
-table.columnNames: Emp Id,Emp Name,Emp Dept,Emp Sal
+  # employee payroll pdf mail sender config
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: username
+    password: password
+    properties:
+      mail.smtp:
+        auth: true
+        starttls.enable: true
+
+# Camunda external service config
+camunda:
+  bpm:
+   admin-user:
+          id: demo
+          password: demo
+
+   client:
+     base-url: http://localhost:8080/rest-engine
+     async-response-timeout: 100
+     worker-id: Employee-Payroll
+
+
+
+
