@@ -14,20 +14,15 @@ import java.io.ByteArrayOutputStream;
 
 import com.itextpdf.html2pdf.resolver.font.DefaultFontProvider;
 
-
 @Service
 @RequiredArgsConstructor
 public class PayrollHtmlPdfConverter {
 
     private final JavaMailSender mailSender;
     public void htmlToPdf(String processedHtml) {
-
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-
         try {
-
             PdfWriter pdfWriter = new PdfWriter(byteArrayOutputStream);
-
             DefaultFontProvider fontProvider = new DefaultFontProvider(true, true, false);
             ConverterProperties converterProperties = new ConverterProperties();
             converterProperties.setFontProvider(fontProvider);
@@ -43,11 +38,10 @@ public class PayrollHtmlPdfConverter {
     }
 
     private void sendMail(byte[] bytes){
-
         try {
+
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
-
             helper.setSubject("Employee payroll");
             helper.setFrom("");
             helper.setTo("");
@@ -55,9 +49,7 @@ public class PayrollHtmlPdfConverter {
 
             DataSource dataSource = new ByteArrayDataSource(bytes, "application/pdf");
             helper.addAttachment("Employee Payroll", dataSource);
-
             mailSender.send(message);
-
         }
         catch (Exception exception) {
             System.out.println(exception.getMessage());

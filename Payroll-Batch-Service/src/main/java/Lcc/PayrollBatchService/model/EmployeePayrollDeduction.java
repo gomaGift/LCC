@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmployeePayrollDeduction {
+    
     @EmbeddedId
     private EmpDeductionCompositeKey key;
     private double percentageDeduction = 0;
     private double amount;
-
 
 }
