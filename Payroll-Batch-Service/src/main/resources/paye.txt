@@ -17,7 +17,6 @@
   gross:         15000
   napsa:          750
   nhima: 120
-  band 1: 
   total tax:    3176
   netPay: 10954
 
