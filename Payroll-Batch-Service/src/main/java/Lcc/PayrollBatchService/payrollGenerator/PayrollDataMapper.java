@@ -1,4 +1,4 @@
-package Lcc.PayrollBatchService.PayrollGenerator;
+package Lcc.PayrollBatchService.payrollGenerator;
 
 import Lcc.PayrollBatchService.model.Payroll;
 import org.springframework.stereotype.Service;

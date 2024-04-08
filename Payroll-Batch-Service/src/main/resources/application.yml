@@ -33,17 +33,18 @@ spring:
         starttls.enable: true
 
 # Camunda external service config
-camunda:
-  bpm:
-   admin-user:
-          id: demo
-          password: demo
+# camunda:
+#   bpm:
+#    admin-user:
+#           id: demo
+#           password: demo
 
-   client:
-     base-url: http://localhost:8080/rest-engine
-     async-response-timeout: 100
-     worker-id: Employee-Payroll
-
-
+#    client:
+#      base-url: http://localhost:8080/engine-rest
+#      async-response-timeout: 100
+#      worker-id: Employee-Payroll
 
 
+
+server:
+  port: 8088
