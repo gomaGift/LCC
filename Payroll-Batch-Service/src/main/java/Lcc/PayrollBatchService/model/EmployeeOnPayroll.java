@@ -18,7 +18,6 @@ public class EmployeeOnPayroll {
     private LocalDate dateStarted;
     private LocalDate dateEnd;
     private boolean active;
-
     public EmployeeOnPayroll(String employeeId){
         this.employeeId = employeeId;
         dateStarted = LocalDate.now();

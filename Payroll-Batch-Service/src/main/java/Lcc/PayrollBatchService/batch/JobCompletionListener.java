@@ -1,15 +1,13 @@
 package Lcc.PayrollBatchService.batch;
 
-import Lcc.PayrollBatchService.PayrollGenerator.PayrollPdfGenerator;
+import Lcc.PayrollBatchService.payrollGenerator.PayrollPdfGenerator;
 import Lcc.PayrollBatchService.model.Payroll;
 import Lcc.PayrollBatchService.service.PayrollService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Component
@@ -18,7 +16,6 @@ public class JobCompletionListener implements JobExecutionListener {
 
     private final PayrollPdfGenerator pdfGenerator;
     private final PayrollService payrollService;
-
 
 
     @Override

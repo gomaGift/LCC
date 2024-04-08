@@ -1,4 +1,4 @@
-package Lcc.PayrollBatchService.PayrollGenerator;
+package Lcc.PayrollBatchService.payrollGenerator;
 
 import com.itextpdf.html2pdf.ConverterProperties;
 import com.itextpdf.html2pdf.HtmlConverter;
