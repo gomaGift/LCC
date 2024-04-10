@@ -105,9 +105,11 @@ public class EmployeeProcessor implements ItemProcessor<EmployeeOnPayroll, Payro
             EmpDeductionCompositeKey compositeKey = new EmpDeductionCompositeKey(empId, deduction, date);
             employeePayrollDeductionService.add(new EmployeePayrollDeduction(compositeKey,percentDeduction,deductAmount));
         }
+
         // net salary
-        double totalDeductions = insuranceDeductions + otherDeductions + pensionDeduction;
-        double netPay = grossSalary + totalDeductions;
+        double totalDeductions = roundOff(insuranceDeductions + otherDeductions + pensionDeduction);
+        double netPay =  roundOff(grossSalary + totalDeductions);
+
 
 
         PayrollCompositeKey key = new PayrollCompositeKey(empId, date);
@@ -123,6 +125,9 @@ public class EmployeeProcessor implements ItemProcessor<EmployeeOnPayroll, Payro
         return date.format(formatter);
     }
 
+      private double roundOff(double amount){
+          return amount * 100 / 100.0;
+      }
 
     }
 
