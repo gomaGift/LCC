@@ -1,10 +1,12 @@
+server:
+  port: 8088
+
 spring:
   application:
         name: Payroll-Batch-Service
 
-
   datasource:
-    url: jdbc:mysql://localhost:3306/mydatabase
+    url: jdbc:mysql://localhost:3306/mydatabase?nullCatalogMeansCurrent=true
     username: root
     password: goma
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -33,18 +35,18 @@ spring:
         starttls.enable: true
 
 # Camunda external service config
-# camunda:
-#   bpm:
-#    admin-user:
-#           id: demo
-#           password: demo
-
-#    client:
-#      base-url: http://localhost:8080/engine-rest
-#      async-response-timeout: 100
-#      worker-id: Employee-Payroll
+camunda:
+   bpm:
+     admin-user:
+           id: demo
+           password: demo
 
 
+     database:
+       schema-update: true
 
-server:
-  port: 8088
+     client:
+      base-url: http://localhost:8088
+      async-response-timeout: 100
+      worker-id: Employee-Payroll
+

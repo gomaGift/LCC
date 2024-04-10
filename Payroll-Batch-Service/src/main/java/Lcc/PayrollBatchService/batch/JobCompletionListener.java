@@ -26,7 +26,7 @@ public class JobCompletionListener implements JobExecutionListener {
     public void afterJob(JobExecution jobExecution) {
         String payrollDate = EmployeeProcessor.formatDate();
         List<Payroll> payrollList = payrollService.findPayrollRecordsByDate(payrollDate);
-        pdfGenerator.generatePayroll(payrollList);
+//        pdfGenerator.generatePayroll(payrollList);
         System.out.println("Job Completed: " + jobExecution.getJobInstance().getJobName());
         // You can add additional logic here, such as sending notifications or logging job completion status.
     }
