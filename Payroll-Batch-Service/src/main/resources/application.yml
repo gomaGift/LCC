@@ -6,7 +6,7 @@ spring:
         name: Payroll-Batch-Service
 
   datasource:
-    url: jdbc:mysql://localhost:3306/mydatabase?nullCatalogMeansCurrent=true
+    url: jdbc:mysql://localhost:3306/lusaka_city_council?nullCatalogMeansCurrent=true
     username: root
     password: goma
     driver-class-name: com.mysql.cj.jdbc.Driver

@@ -1,7 +1,6 @@
 package Lcc.PayrollBatchService.service.implementation;
 
 import Lcc.PayrollBatchService.model.Employee;
-import Lcc.PayrollBatchService.model.Position;
 import Lcc.PayrollBatchService.respository.EmployeeRepository;
 import Lcc.PayrollBatchService.service.EmployeeService;
 import org.springframework.batch.item.Chunk;
@@ -32,7 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Position findPositionByEmployeeId(String empId) {
+    public String findPositionByEmployeeId(String empId) {
         return employeeRepository.findPositionByEmployeeId(empId);
     }
 

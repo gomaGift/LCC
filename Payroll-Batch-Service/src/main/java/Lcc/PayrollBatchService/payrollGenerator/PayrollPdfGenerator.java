@@ -19,7 +19,7 @@ public class PayrollPdfGenerator {
     public void generatePayroll(List<Payroll> payrollList){
         String finalHtml = null;
         Context context = payrollDataMapper.setData(payrollList);
-        finalHtml = templateEngine.process("payroll_table", context);
+        finalHtml = templateEngine.process("pay_slip", context);
         payrollHtmlPdfConverter.htmlToPdf(finalHtml);
     }
 }

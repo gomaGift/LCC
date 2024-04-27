@@ -8,11 +8,11 @@ import java.time.LocalDate;
 
 @Entity
 @Data
+@Table(name = "salary_scales")
 public class SalaryScale {
 
     @Id
     private String salaryScale;
-    private LocalDate dateFrom;
-    private LocalDate dateTo;
-    private double basicSalary;
+    private String division;
+    private String description;
 }
