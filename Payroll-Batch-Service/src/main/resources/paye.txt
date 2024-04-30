@@ -28,8 +28,16 @@ band, upperbracket, percentage,   year      taxable amount
   4         -99        37.5        2024      2146
   
   
-
-
+taxBand prev = null
+taxBand curr = null
+for (band in Bands)
+    curr = band
+    if band <= band.upperBracket
+    if prev == null
+     break
+     else
+     prevBand
+ if basic <= band ()
 
 
 

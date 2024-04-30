@@ -1,9 +1,7 @@
 package Lcc.PayrollBatchService.batch;
 
-import Lcc.PayrollBatchService.model.Employee;
 import Lcc.PayrollBatchService.model.EmployeeOnPayroll;
 import Lcc.PayrollBatchService.service.EmployeeOnPayrollService;
-import Lcc.PayrollBatchService.service.EmployeeService;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.NonTransientResourceException;
 import org.springframework.batch.item.ParseException;

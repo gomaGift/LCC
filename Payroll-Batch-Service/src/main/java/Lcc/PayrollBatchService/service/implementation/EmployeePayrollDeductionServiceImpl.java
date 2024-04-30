@@ -4,8 +4,9 @@ import Lcc.PayrollBatchService.model.EmployeePayrollDeduction;
 import Lcc.PayrollBatchService.respository.EmployeePayrollDeductionRepository;
 import Lcc.PayrollBatchService.service.EmployeePayrollDeductionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -16,4 +17,11 @@ public class EmployeePayrollDeductionServiceImpl implements EmployeePayrollDeduc
     public void add(EmployeePayrollDeduction employeePayrollDeduction) {
         employeePayrollDeductionRepository.save(employeePayrollDeduction);
     }
+
+    @Override
+    public List<EmployeePayrollDeduction> findAllDeductionsByEmployeeNumberAndDate(String employeeId, String paymentDate) {
+        return employeePayrollDeductionRepository.findAllByEmployeeNumberAndDate(employeeId,paymentDate);
+    }
+
+
 }

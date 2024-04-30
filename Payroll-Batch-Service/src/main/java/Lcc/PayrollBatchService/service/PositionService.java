@@ -1,5 +1,7 @@
 package Lcc.PayrollBatchService.service;
 
+import Lcc.PayrollBatchService.model.Position;
+
 public interface PositionService {
    String findSalaryScaleByPosition(String position);
 
@@ -12,4 +14,6 @@ public interface PositionService {
     double findTransportAllowanceByPosition(String position);
 
     double findEducationalAllowanceByPosition(String position);
+
+    Position findPositionByEmpPosition(String employeePosition);
 }

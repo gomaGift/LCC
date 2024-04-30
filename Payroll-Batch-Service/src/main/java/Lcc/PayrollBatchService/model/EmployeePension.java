@@ -13,12 +13,10 @@ public class EmployeePension {
     @Id
     private String employeeId;
 
-    @ManyToOne 
-    @JoinColumn(name = "pensionType")
-    private Pension pension;
+    private String pension;
     private LocalDate dateStarted;
     private LocalDate dateEnd;
-    public EmployeePension(String employeeId, Pension pension){
+    public EmployeePension(String employeeId, String pension){
         this.employeeId = employeeId;
         this.pension = pension;
         dateStarted = LocalDate.now();

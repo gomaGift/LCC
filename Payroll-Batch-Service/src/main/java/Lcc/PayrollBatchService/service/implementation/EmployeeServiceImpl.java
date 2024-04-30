@@ -7,6 +7,7 @@ import org.springframework.batch.item.Chunk;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +34,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public String findPositionByEmployeeId(String empId) {
         return employeeRepository.findPositionByEmployeeId(empId);
+    }
+
+    @Override
+    public LocalDate findEmployeeDateOfFirstEngagementByEmployeeId(String employeeId) {
+        return employeeRepository.findDateEmployeeDateOfFirstEngagementByEmpId(employeeId);
+    }
+
+    @Override
+    public Employee findEmployeeByEmployeeId(String employeeId) {
+        return employeeRepository.findByEmployeeByEmployeeId(employeeId);
     }
 
     @Override

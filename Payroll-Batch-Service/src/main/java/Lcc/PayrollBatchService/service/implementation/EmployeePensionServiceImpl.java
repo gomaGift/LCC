@@ -15,8 +15,5 @@ public class EmployeePensionServiceImpl implements EmployeePensionService {
         return employeePensionRepository.findPensionTypeByEmployeeId(empId);
     }
 
-    @Override
-    public double findEmployeePercentageByPensionType(String pensionType) {
-        return employeePensionRepository.findEmployeePercentageByPensionType(pensionType);
-    }
+
 }

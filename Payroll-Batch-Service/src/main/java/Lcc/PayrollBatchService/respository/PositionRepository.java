@@ -22,4 +22,7 @@ public interface PositionRepository extends JpaRepository<Position, String> {
     double findTransportAllowanceByPosition(String position);
     @Query("select p.educationAllowance from Position p where p.position = :position")
     double findEducationalByPosition(String position);
+
+    @Query("select p from Position p where p.position = :employeePosition")
+    Position findPositionByEmployeePosition(String employeePosition);
 }

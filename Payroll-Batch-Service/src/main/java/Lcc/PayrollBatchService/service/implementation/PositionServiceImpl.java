@@ -1,5 +1,6 @@
 package Lcc.PayrollBatchService.service.implementation;
 
+import Lcc.PayrollBatchService.model.Position;
 import Lcc.PayrollBatchService.respository.PositionRepository;
 import Lcc.PayrollBatchService.service.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,10 @@ public class PositionServiceImpl implements PositionService {
     @Override
     public double findEducationalAllowanceByPosition(String position) {
         return positionRepository.findEducationalByPosition(position);
+    }
+
+    @Override
+    public Position findPositionByEmpPosition(String employeePosition) {
+        return positionRepository.findPositionByEmployeePosition(employeePosition);
     }
 }

@@ -7,10 +7,13 @@ import jakarta.activation.DataSource;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.mail.util.ByteArrayDataSource;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.IOUtils;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 
 import com.itextpdf.html2pdf.resolver.font.DefaultFontProvider;
 
@@ -19,7 +22,7 @@ import com.itextpdf.html2pdf.resolver.font.DefaultFontProvider;
 public class PayrollHtmlPdfConverter {
 
     private final JavaMailSender mailSender;
-    public void htmlToPdf(String processedHtml) {
+    public void htmlToPdf(String processedHtml, String empFullname) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try {
             PdfWriter pdfWriter = new PdfWriter(byteArrayOutputStream);
@@ -28,8 +31,16 @@ public class PayrollHtmlPdfConverter {
             converterProperties.setFontProvider(fontProvider);
             HtmlConverter.convertToPdf(processedHtml, pdfWriter, converterProperties);
 
-            byte[] pdfBytes = byteArrayOutputStream.toByteArray();
-            sendMail(pdfBytes);
+            String filePath = "C:\\Users\\Goma\\Desktop\\LCC\\Payroll-Batch-Service\\";
+
+// Write the byte array to a file
+            File outputFile = new File( filePath+ "payslipfor "+ empFullname + ".pdf");
+
+            IOUtils.write(byteArrayOutputStream.toByteArray(), new FileOutputStream(outputFile));
+
+
+//            byte[] pdfBytes = byteArrayOutputStream.toByteArray();
+//            sendMail(pdfBytes);
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -43,8 +54,8 @@ public class PayrollHtmlPdfConverter {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setSubject("Employee payroll");
-            helper.setFrom("");
-            helper.setTo("");
+            helper.setFrom("gomagiftk01@gmail.com");
+            helper.setTo("giftian.kg@gmail.com");
             helper.setText("Please find the attached employee payroll.");
 
             DataSource dataSource = new ByteArrayDataSource(bytes, "application/pdf");

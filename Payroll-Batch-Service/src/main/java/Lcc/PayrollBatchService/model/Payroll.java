@@ -23,6 +23,15 @@ public class Payroll {
     private double totalDeductions;
     private double netPay;
     private double grossPay;
+    private double salaryArrears;
+    private double salaryRate;
+    private double grossPayYearToDate;
+    private double napsaYearToDate = 0;
+    private double taxableGross;
+    private double pensionYearToDate;
+    private double taxDue;
+    private double taxCredit;
+    private double taxPaidYearToDate;
 
 
 

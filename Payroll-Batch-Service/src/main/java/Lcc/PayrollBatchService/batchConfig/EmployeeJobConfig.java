@@ -4,7 +4,6 @@ import Lcc.PayrollBatchService.batch.EmployeeProcessor;
 import Lcc.PayrollBatchService.batch.EmployeeReader;
 import Lcc.PayrollBatchService.batch.EmployeeWriter;
 import Lcc.PayrollBatchService.batch.JobCompletionListener;
-import Lcc.PayrollBatchService.model.Employee;
 import Lcc.PayrollBatchService.model.EmployeeOnPayroll;
 import Lcc.PayrollBatchService.model.Payroll;
 import org.springframework.batch.core.Job;

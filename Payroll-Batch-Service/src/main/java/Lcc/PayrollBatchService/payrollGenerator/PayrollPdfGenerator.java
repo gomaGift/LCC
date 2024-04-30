@@ -1,5 +1,7 @@
 package Lcc.PayrollBatchService.payrollGenerator;
 
+import Lcc.PayrollBatchService.dto.PaySlipEmployeeData;
+import Lcc.PayrollBatchService.model.EmployeePayrollDeduction;
 import Lcc.PayrollBatchService.model.Payroll;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -16,10 +18,10 @@ public class PayrollPdfGenerator {
     private final PayrollHtmlPdfConverter payrollHtmlPdfConverter;
     private final SpringTemplateEngine templateEngine;
 
-    public void generatePayroll(List<Payroll> payrollList){
+    public void generatePayroll(Payroll payroll, List<EmployeePayrollDeduction> employeePayrollDeductions, PaySlipEmployeeData employeeData, String empFullname){
         String finalHtml = null;
-        Context context = payrollDataMapper.setData(payrollList);
+        Context context = payrollDataMapper.setData(payroll, employeePayrollDeductions, employeeData);
         finalHtml = templateEngine.process("pay_slip", context);
-        payrollHtmlPdfConverter.htmlToPdf(finalHtml);
+        payrollHtmlPdfConverter.htmlToPdf(finalHtml, empFullname);
     }
 }
