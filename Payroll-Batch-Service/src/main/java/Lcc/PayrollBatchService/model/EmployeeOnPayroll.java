@@ -24,5 +24,4 @@ public class EmployeeOnPayroll {
         active = true;
     }
 
-
 }

@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import com.itextpdf.html2pdf.resolver.font.DefaultFontProvider;
 
@@ -34,7 +36,7 @@ public class PayrollHtmlPdfConverter {
             String filePath = "C:\\Users\\Goma\\Desktop\\LCC\\Payroll-Batch-Service\\";
 
 // Write the byte array to a file
-            File outputFile = new File( filePath+ "payslipfor "+ empFullname + ".pdf");
+            File outputFile = new File( filePath+ "payslipfor "+ empFullname +" "+ formatCurrentDate()+ ".pdf");
 
             IOUtils.write(byteArrayOutputStream.toByteArray(), new FileOutputStream(outputFile));
 
@@ -66,5 +68,12 @@ public class PayrollHtmlPdfConverter {
             System.out.println(exception.getMessage());
             throw new RuntimeException(exception.getMessage());
         }
+    }
+
+    private String formatCurrentDate(){
+        LocalDate localDate = LocalDate.now();
+        DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("MMMM yyy");
+        return formattedDate.format(localDate);
+
     }
 }

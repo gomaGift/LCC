@@ -2,13 +2,13 @@ package Lcc.PayrollBatchService.camundaExtenalService;
 
 import Lcc.PayrollBatchService.model.EmployeeOnPayroll;
 import Lcc.PayrollBatchService.service.EmployeeOnPayrollService;
-import lombok.RequiredArgsConstructor;
 import org.camunda.bpm.client.spring.annotation.ExternalTaskSubscription;
 import org.camunda.bpm.client.task.ExternalTask;
 import org.camunda.bpm.client.task.ExternalTaskHandler;
 import org.camunda.bpm.client.task.ExternalTaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /*
@@ -21,11 +21,12 @@ import org.springframework.stereotype.Service;
         variableNames = "employeeId",
         autoOpen = false
 )
-@RequiredArgsConstructor
+
 @Service
 public class EmployeeOnPayrollExternalService implements ExternalTaskHandler {
 
-    private final EmployeeOnPayrollService employeeOnPayrollService;
+    @Autowired
+    private EmployeeOnPayrollService employeeOnPayrollService;
     Logger LOG = LoggerFactory.getLogger(EmployeeOnPayroll.class);
 
     @Override
