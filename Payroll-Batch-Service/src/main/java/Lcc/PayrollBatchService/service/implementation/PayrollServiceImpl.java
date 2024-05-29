@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.batch.item.Chunk;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,8 +22,9 @@ public class PayrollServiceImpl implements PayrollService {
     }
 
     @Override
-    public void saveAll(Chunk<? extends Payroll> chunk) {
+    public Chunk<? extends Payroll> saveAll(Chunk<? extends Payroll> chunk) {
         payrollRepository.saveAll(chunk);
+        return chunk;
     }
 
     @Override
@@ -31,6 +33,17 @@ public class PayrollServiceImpl implements PayrollService {
     }
 
 
+
+
+    @Override
+    public double findYtdGrossSalary(String empId, Date startDate) {
+       return payrollRepository.findYtdGrossSalary(empId, startDate);
+    }
+
+    @Override
+    public double findTaxPaidYearToDate(String empId, Date startDate) {
+        return payrollRepository.findTaxPaidYearToDate(empId, startDate);
+    }
 
 
 }

@@ -72,7 +72,7 @@ public class PayrollHtmlPdfConverter {
 
     private String formatCurrentDate(){
         LocalDate localDate = LocalDate.now();
-        DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("MMMM yyy");
+        DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("MMMM-yyy");
         return formattedDate.format(localDate);
 
     }

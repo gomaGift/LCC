@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Entity
-@Data
-@NoArgsConstructor
 public class EmployeePension {
     @Id
     private String employeeId;
@@ -22,4 +20,38 @@ public class EmployeePension {
         dateStarted = LocalDate.now();
     }
 
+    public EmployeePension() {
+    }
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public String getPension() {
+        return pension;
+    }
+
+    public void setPension(String pension) {
+        this.pension = pension;
+    }
+
+    public LocalDate getDateStarted() {
+        return dateStarted;
+    }
+
+    public void setDateStarted(LocalDate dateStarted) {
+        this.dateStarted = dateStarted;
+    }
+
+    public LocalDate getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(LocalDate dateEnd) {
+        this.dateEnd = dateEnd;
+    }
 }

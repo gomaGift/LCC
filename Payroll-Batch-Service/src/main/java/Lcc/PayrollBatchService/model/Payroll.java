@@ -1,10 +1,11 @@
 package Lcc.PayrollBatchService.model;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UpdateTimestamp;
+import java.util.Date;
 
 @Entity
 @Data
@@ -13,6 +14,8 @@ import lombok.NoArgsConstructor;
 public class Payroll {
     @EmbeddedId
     private PayrollCompositeKey key;
+
+
 
     private double basicSalary;
     private double housingAllowance;
@@ -26,13 +29,14 @@ public class Payroll {
     private double salaryArrears;
     private double salaryRate;
     private double grossPayYearToDate;
-    private double napsaYearToDate = 0;
+    private double napsaYearToDate;
     private double taxableGross;
     private double pensionYearToDate;
     private double taxDue;
-    private double taxCredit;
+    private double taxCredit ;
     private double taxPaidYearToDate;
 
-
-
+    @Temporal(TemporalType.DATE)
+    @UpdateTimestamp
+    private Date lastModified;
 }

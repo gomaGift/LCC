@@ -3,6 +3,7 @@ package Lcc.PayrollBatchService.service;
 import Lcc.PayrollBatchService.model.Payroll;
 import org.springframework.batch.item.Chunk;
 
+import java.util.Date;
 import java.util.List;
 
 public interface PayrollService {
@@ -10,7 +11,13 @@ public interface PayrollService {
 
 
 
-    void saveAll(Chunk<? extends Payroll> chunk);
+    Chunk<? extends Payroll> saveAll(Chunk<? extends Payroll> chunk);
 
     List<Payroll> findPayrollRecordsByDate(String payrollDate);
+
+
+
+    double findYtdGrossSalary(String empId, Date startDate);
+
+    double findTaxPaidYearToDate(String empId, Date startDate);
 }

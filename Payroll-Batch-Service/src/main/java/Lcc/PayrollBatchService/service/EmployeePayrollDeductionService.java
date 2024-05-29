@@ -2,6 +2,7 @@ package Lcc.PayrollBatchService.service;
 
 import Lcc.PayrollBatchService.model.EmployeePayrollDeduction;
 
+import java.util.Date;
 import java.util.List;
 
 public interface EmployeePayrollDeductionService {
@@ -9,4 +10,6 @@ public interface EmployeePayrollDeductionService {
 
 
     List<EmployeePayrollDeduction> findAllDeductionsByEmployeeNumberAndDate(String employeeId, String paymentDate);
+
+    double getPensionYearToDate(String employeeId, String deductionType, Date startDate);
 }

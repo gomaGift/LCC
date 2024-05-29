@@ -6,6 +6,7 @@ import Lcc.PayrollBatchService.service.EmployeePayrollDeductionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,6 +22,11 @@ public class EmployeePayrollDeductionServiceImpl implements EmployeePayrollDeduc
     @Override
     public List<EmployeePayrollDeduction> findAllDeductionsByEmployeeNumberAndDate(String employeeId, String paymentDate) {
         return employeePayrollDeductionRepository.findAllByEmployeeNumberAndDate(employeeId,paymentDate);
+    }
+
+    @Override
+    public double getPensionYearToDate(String employeeId, String deductionType, Date startDate) {
+        return employeePayrollDeductionRepository.calculatePensionYearToDate(employeeId,deductionType, startDate);
     }
 
 

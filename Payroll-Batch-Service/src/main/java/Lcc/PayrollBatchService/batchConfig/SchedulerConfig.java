@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
-
 @EnableScheduling
 @Configuration
 public class SchedulerConfig {
@@ -20,19 +19,14 @@ public class SchedulerConfig {
     @Autowired
     private JobLauncher jobLauncher;
 
-   @Scheduled(fixedDelay = 1000, initialDelay = 1000) // for test purposes
-//     @Scheduled(cron = "0 0 0 15 * *") // runs every 15th day of the month
+//   @Scheduled(fixedDelay = 2000, initialDelay = 1000) // for test purposes
+     @Scheduled(cron = "0 4 9 * * *") // runs every 15th day of the month
     public void scheduleJob() throws Exception {
 
         jobLauncher
                 .run(job, new JobParametersBuilder().
-                        addLong("uniqueness", System.nanoTime()).toJobParameters());
-
-
+                        addLong("startAt", System.currentTimeMillis()).toJobParameters());
     }
-
-
-
 
     }
 

@@ -15,6 +15,8 @@ import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
@@ -29,24 +31,35 @@ public class EmployeeJobConfig {
     @Autowired
     private  JobCompletionListener jobCompletionListener;
 
+    @Autowired
+    private JobRepository jobRepository;
+    @Autowired
+    private PlatformTransactionManager transactionManager;
 
     @Bean
-    public Job employeeJob(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
+    public Job employeeJob() {
         return new JobBuilder("employeeJob", jobRepository)
                 .listener(jobCompletionListener)
+
                 .incrementer(new RunIdIncrementer())
-                .start(chunkStep(jobRepository, transactionManager))
+                .start(chunkStep())
                 .build();
     }
     @Bean
-    public Step chunkStep(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
+    public Step chunkStep() {
         return new StepBuilder("employPayrollProcess1", jobRepository).<EmployeeOnPayroll, Payroll>
-                chunk(10, transactionManager)
+                chunk(1, transactionManager)
                 .reader(employeeReader)
                 .processor(employeeProcessor)
                 .writer(employeeWriter)
                 .build();
+    }
 
+    @Bean
+    public TaskExecutor taskExecutor(){
+        SimpleAsyncTaskExecutor taskExecutor = new SimpleAsyncTaskExecutor();
+        taskExecutor.setConcurrencyLimit(8);
+        return taskExecutor;
     }
 
 

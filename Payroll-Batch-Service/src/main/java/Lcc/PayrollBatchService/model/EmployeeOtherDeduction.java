@@ -11,7 +11,7 @@ public class EmployeeOtherDeduction {
     @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("employeeId")
     @JoinColumn(name = "employee_id")
-    private Employee employee;
+    private EmployeeOnPayroll employee;
 
     @ManyToOne
     @MapsId("otherDeductionsType")
