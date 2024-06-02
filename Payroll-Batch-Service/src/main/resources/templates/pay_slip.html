@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+<!--  <link th:href = "@{C:/Users/Goma/Desktop/LCC/Payroll-Batch-Service/src/main/resources/static/css/styles.css}" rel="stylesheet" />-->
+  <!-- <link href="css/extras.css" rel="stylesheet" /> -->
+  <title>PaySlip</title>
+  <style>
+
+    html,
+    body {
+      font-size: 80% !important;
+      padding-bottom: 50px !important;
+    }
+
+    .payment_slip {
+      width: calc(1240px/2);
+      /* border: 1px solid #000; */
+      margin: 0 auto;
+    }
+
+    table {
+      width: 100%;
+    }
+
+      #title {
+        border-bottom: 2px solid #000 !important;
+      }
+      th{
+        font-weight: normal !important;
+        font-style: normal !important;
+      }
+
+      #border-table {
+        border-top: 2px solid #000 !important;
+        border-bottom: 2px solid #000 !important;
+      }
+
+      .border-top {
+        border-top: 2px solid #000 !important;
+        ;
+      }
+
+      .number {
+        text-align: right;
+      }
+
+    #title {
+      border-bottom: 1px solid #000;
+    }
+
+    img {
+      width: 80px !important;
+      margin: 0 auto !important;
+    }
+
+    .cell-border {
+      border-top: 2px solid #000 !important;
+      border-bottom: 2px solid #000 !important;
+    }
+
+    .center-align {
+      text-align: center !important;
+    }
+  </style>
+</head>
+
+<body class="pt-3">
+  <div class="payment_slip">
+    <div class="container mb-3" style="text-align: center;">
+      <img th:src="@{src/main/resources/static/img/lsk_council.png}" alt="">
+    </div>
+    <div class="container-fluid">
+      <div class="row" id="title">
+        <div class="col-sm-6">
+          <h5>PAY STATEMENT SLIP FOR</h5>
+        </div>
+        <div class="col-sm-6">
+          <h5 th:text="${#dates.format(#dates.createNow(), 'MMMM').toUpperCase() + ' ' + #dates.format(#dates.createNow(), 'yyy')}"></h5>
+        </div>
+      </div>
+      <div >
+        <table class="mt-3">
+          <thead >
+          <tr>
+            <th>EMP No.</th>
+            <th th:text = "${employeeData.employeeNumber}"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Name</td>
+            <td th:text = "${employeeData.name}"></td>
+          </tr>
+          <tr>
+            <td>NRC No.</td>
+            <td th:text = "${employeeData.nrcNumber}"></td>
+          </tr>
+          <tr>
+            <td>S/SECURITY No</td>
+            <td th:text = "${employeeData.socialSecurityNumber}"></td>
+          </tr>
+          <tr>
+            <td>DATE ENGAGED</td>
+            <td th:text ="${employeeData.dateEngaged}"></td>
+          </tr>
+          <tr>
+            <td>EMPLOYEE TYPE</td>
+            <td th:text ="${employeeData.employeeType}"></td>
+          </tr>
+          <tr>
+            <td>JOB GRADE</td>
+            <td th:text ="${employeeData.jobGrade}"></td>
+          </tr>
+          <tr>
+            <td>JOB TITLE</td>
+            <td th:text ="${employeeData.jobTitle}"></td>
+          </tr>
+          <tr>
+            <td>BRANCH</td>
+            <td th:text ="${employeeData.branch}"></td>
+          </tr>
+            <td>DEPARTMENT</td>
+            <td th:text = "${employeeData.department}"></td>
+          </tr>
+          <tr>
+            <td>SECTION</td>
+            <td th:text = "${employeeData.section}"></td>
+          </tr>
+          <tr>
+            <td>BANK NAME</td>
+            <td th:text = "${employeeData.bankName}"></td>
+          </tr>
+          <tr>
+            <td>BANK AC/ No</td>
+            <td th:text ="${employeeData.bankAccountNumber}"></td>
+          </tr>
+          <tr>
+            <td>PAY POINT</td>
+            <td th:text = "${employeeData.payPoint}"></td>
+          </tr>
+          <tr>
+            <td>EMAIL</td>
+            <td th:text = "${employeeData.email}"></td>
+          </tr>
+          </tbody>
+
+        </table>
+
+        <!-- Amounts table -->
+        <table class="mt-3 cell-border">
+          <thead id="border-table">
+            <tr>
+              <th>DESCRIPTION</th>
+              <th>BALANCE UNITS/HR</th>
+              <th>AMOUNT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>EARNINGS</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>BASIC PAY</td>
+              <td class="number"></td>
+              <td class="number" th:text ="${payroll.basicSalary}"></td>
+            </tr>
+            <tr>
+              <td>HOUSING ALLOWANCE</td>
+              <td class="number"></td>
+              <td class="number" th:text ="${payroll.housingAllowance}"></td>
+            </tr>
+            <tr>
+              <td>SALARY ARREARS</td>
+              <td class="number" ></td>
+              <td class="number" th:text="${payroll.salaryArrears}"></td>
+            </tr>
+            <tr>
+              <td>TRANSPORT ALLOWANCE</td>
+              <td class="number"></td>
+              <td class="number" th:text ="${payroll.transportAllowance}"></td>
+            </tr>
+            <tr>
+              <td>EDUCATION ALLOWANCE</td>
+              <td class="number" ></td>
+              <td class="number" th:text = "${payroll.educationAllowance}"></td>
+            </tr>
+            <tr>
+              <td>RISK ALLOWANCE</td>
+              <td class="number"></td>
+              <td class="number" th:text = "${payroll.riskAllowance}"></td>
+            </tr>
+
+            <tr>
+              <td>FUEL ALLOWANCE</td>
+              <td class="number" ></td>
+              <td class="number" th:text ="${payroll.fuelAllowance}"></td>
+            </tr>
+
+            <tr>
+              <td class="pt-1"> </td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="pt-3">GROSS PAY</td>
+              <td></td>
+              <td class="border-top number" th:text ="${payroll.grossPay}"></td>
+            </tr>
+            <!-- Do not remove the empty structure above -->
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>DEDUCTIONS:</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr th:each = "deduction : ${payrollDeductions}">
+              <td th:text="${deduction.key.deductionType}"></td>
+              <td></td>
+              <td class="number" th:text="${deduction.amount}"></td>
+            </tr>
+
+            <tr>
+              <td class="pt-3">GROSS PAY</td>
+              <td></td>
+              <td class="border-top number" th:text ="${payroll.grossPay}"></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>TOTAL DEDUCTIONS K</td>
+              <td class="number" th:text ="${payroll.totalDeductions}"></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>NET PAY K</td>
+              <td class="number" th:text ="${payroll.netPay}"></td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <table class="mt-3 cell-border">
+          <tbody>
+
+            <tr>
+              <td>SALARY RATE</td>
+              <td class="number" th:text="${payroll.basicSalary}"></td>
+              <td class="center-align">LEAVE RATE</td>
+              <td class="number"></td>
+            </tr>
+
+            <tr>
+              <td>GROSS PAY YTD</td>
+              <td class="number" th:text="${payroll.grossPayYearToDate}"></td>
+              <td class="center-align">LEAVE DAYS ACCRUED</td>
+              <td class="number"></td>
+            </tr>
+
+            <tr>
+              <td>NAPSA YTD</td>
+              <td class="number" th:text="${payroll.napsaYearToDate}"></td>
+              <td class="center-align">LEAVE DAYS VALUE</td>
+              <td class="number"></td>
+            </tr>
+
+            <tr>
+              <td>PENSION YTD</td>
+              <td class="number" th:text="${payroll.pensionYearToDate}"></td>
+            </tr>
+
+            <tr>
+              <td>TAXABLE GROSS</td>
+              <td class="number" th:text="${payroll.taxableGross}" ></td>
+            </tr>
+
+            <tr>
+              <td>TAX DUE</td>
+              <td class="number" th:text="${payroll.taxDue}"></td>
+            </tr>
+
+            <tr>
+              <td>TAX CREDIT</td>
+              <td class="number" th:text="${payroll.taxCredit}"></td>
+            </tr>
+
+            <tr>
+              <td>TAX PAID YTD</td>
+              <td class="number" th:text="${payroll.taxPaidYearToDate}"></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+
+</html>
