@@ -6,8 +6,8 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import jakarta.activation.DataSource;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.mail.util.ByteArrayDataSource;
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -20,11 +20,11 @@ import java.time.format.DateTimeFormatter;
 import com.itextpdf.html2pdf.resolver.font.DefaultFontProvider;
 
 @Service
-@RequiredArgsConstructor
 public class PayrollHtmlPdfConverter {
 
-    private final JavaMailSender mailSender;
-    public void htmlToPdf(String processedHtml, String empFullname) {
+    @Autowired
+    private  JavaMailSender mailSender;
+    public byte[] htmlToPdf(String processedHtml, String empFullname) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try {
             PdfWriter pdfWriter = new PdfWriter(byteArrayOutputStream);
@@ -34,15 +34,12 @@ public class PayrollHtmlPdfConverter {
             HtmlConverter.convertToPdf(processedHtml, pdfWriter, converterProperties);
 
             String filePath = "C:\\Users\\Goma\\Desktop\\LCC\\Payroll-Batch-Service\\";
-
-// Write the byte array to a file
+            // Write the byte array to a file
             File outputFile = new File( filePath+ "payslipfor "+ empFullname +" "+ formatCurrentDate()+ ".pdf");
 
             IOUtils.write(byteArrayOutputStream.toByteArray(), new FileOutputStream(outputFile));
 
-
-//            byte[] pdfBytes = byteArrayOutputStream.toByteArray();
-//            sendMail(pdfBytes);
+            return byteArrayOutputStream.toByteArray();
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -50,25 +47,7 @@ public class PayrollHtmlPdfConverter {
         }
     }
 
-    private void sendMail(byte[] bytes){
-        try {
 
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setSubject("Employee payroll");
-            helper.setFrom("gomagiftk01@gmail.com");
-            helper.setTo("giftian.kg@gmail.com");
-            helper.setText("Please find the attached employee payroll.");
-
-            DataSource dataSource = new ByteArrayDataSource(bytes, "application/pdf");
-            helper.addAttachment("Employee Payroll", dataSource);
-            mailSender.send(message);
-        }
-        catch (Exception exception) {
-            System.out.println(exception.getMessage());
-            throw new RuntimeException(exception.getMessage());
-        }
-    }
 
     private String formatCurrentDate(){
         LocalDate localDate = LocalDate.now();
@@ -76,4 +55,6 @@ public class PayrollHtmlPdfConverter {
         return formattedDate.format(localDate);
 
     }
+
+
 }

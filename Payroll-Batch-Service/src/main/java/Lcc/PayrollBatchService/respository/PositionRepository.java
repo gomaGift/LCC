@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PositionRepository extends JpaRepository<Position, String> {
+public interface PositionRepository extends JpaRepository<Position, Integer> {
 
     @Query("select p.salaryScale from Position p where p.position = :position")
     String findSalaryScaleByPosition(String position);

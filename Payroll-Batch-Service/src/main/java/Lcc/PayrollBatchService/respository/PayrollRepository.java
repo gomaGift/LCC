@@ -22,4 +22,7 @@ public interface PayrollRepository extends JpaRepository<Payroll, PayrollComposi
 
     @Query("SELECT COALESCE(sum(p.taxDue), 0) FROM Payroll p WHERE p.key.employeeId= :empId AND p.lastModified >= :startDate")
     double findTaxPaidYearToDate(String empId, Date startDate);
+
+    @Query("SELECT p FROM Payroll p WHERE MONTH(p.lastModified) = :currentMonth AND YEAR(p.lastModified) = :currentYear")
+    List<Payroll> findByMonthAndYear(int currentMonth, int currentYear);
 }

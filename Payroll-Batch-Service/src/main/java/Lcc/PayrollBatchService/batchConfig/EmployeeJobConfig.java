@@ -1,9 +1,6 @@
 package Lcc.PayrollBatchService.batchConfig;
 
-import Lcc.PayrollBatchService.batch.EmployeeProcessor;
-import Lcc.PayrollBatchService.batch.EmployeeReader;
-import Lcc.PayrollBatchService.batch.EmployeeWriter;
-import Lcc.PayrollBatchService.batch.JobCompletionListener;
+import Lcc.PayrollBatchService.batch.*;
 import Lcc.PayrollBatchService.model.EmployeeOnPayroll;
 import Lcc.PayrollBatchService.model.Payroll;
 import org.springframework.batch.core.Job;
@@ -35,6 +32,8 @@ public class EmployeeJobConfig {
     private JobRepository jobRepository;
     @Autowired
     private PlatformTransactionManager transactionManager;
+    @Autowired
+    private PayrollProcessorTasklet payrollProcessorTasklet;
 
     @Bean
     public Job employeeJob() {
@@ -43,6 +42,7 @@ public class EmployeeJobConfig {
 
                 .incrementer(new RunIdIncrementer())
                 .start(chunkStep())
+                .next(payrollProcessTaskletStep())
                 .build();
     }
     @Bean
@@ -53,6 +53,12 @@ public class EmployeeJobConfig {
                 .processor(employeeProcessor)
                 .writer(employeeWriter)
                 .build();
+    }
+    @Bean
+    public Step payrollProcessTaskletStep(){
+        return  new StepBuilder("payrollProcessorTasklet", jobRepository)
+                            .tasklet(payrollProcessorTasklet,transactionManager)
+                            .build();
     }
 
     @Bean

@@ -18,10 +18,10 @@ public class PayrollPdfGenerator {
     private final PayrollHtmlPdfConverter payrollHtmlPdfConverter;
     private final SpringTemplateEngine templateEngine;
 
-    public void generatePayroll(Payroll payroll, List<EmployeePayrollDeduction> employeePayrollDeductions, PaySlipEmployeeData employeeData, String empFullname){
+    public byte[] generatePayroll(Payroll payroll, List<EmployeePayrollDeduction> employeePayrollDeductions, PaySlipEmployeeData employeeData, String empFullname){
         String finalHtml = null;
         Context context = payrollDataMapper.setData(payroll, employeePayrollDeductions, employeeData);
         finalHtml = templateEngine.process("pay_slip", context);
-        payrollHtmlPdfConverter.htmlToPdf(finalHtml, empFullname);
+       return payrollHtmlPdfConverter.htmlToPdf(finalHtml, empFullname);
     }
 }

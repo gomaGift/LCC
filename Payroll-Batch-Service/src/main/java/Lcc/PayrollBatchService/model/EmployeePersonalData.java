@@ -8,7 +8,7 @@ public class EmployeePersonalData {
     public EmployeePersonalData() {
     }
 
-    public EmployeePersonalData(String employeeNumber, String formerFileNumber, String title, String nrc, String socialSecurityNumber, String surname, String firstname, String middleName, String sex, String staffPhoto, String maritalStatus, String maidenName, String physicalChallenge, String postalAddress, String townOrVillage) {
+    public EmployeePersonalData(String employeeNumber, String formerFileNumber, String title, String nrc, String socialSecurityNumber, String surname, String firstname, String middleName, String sex, String staffPhoto, String maritalStatus, String maidenName, String physicalChallenge, String postalAddress, String townOrVillage, String email) {
         this.employeeNumber = employeeNumber;
         this.formerFileNumber = formerFileNumber;
         this.title = title;
@@ -24,8 +24,8 @@ public class EmployeePersonalData {
         this.physicalChallenge = physicalChallenge;
         this.postalAddress = postalAddress;
         this.townOrVillage = townOrVillage;
+        this.email = email;
     }
-
     public String getEmployeeNumber() {
         return employeeNumber;
     }
@@ -145,6 +145,13 @@ public class EmployeePersonalData {
     public void setTownOrVillage(String townOrVillage) {
         this.townOrVillage = townOrVillage;
     }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 
     @Id
     private String employeeNumber;
@@ -162,5 +169,6 @@ public class EmployeePersonalData {
     private String physicalChallenge;
     private String postalAddress;
     private String townOrVillage;
+    private String email;
 
 }
