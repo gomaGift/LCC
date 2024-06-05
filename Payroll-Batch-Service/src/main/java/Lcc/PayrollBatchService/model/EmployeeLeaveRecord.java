@@ -1,46 +1,29 @@
 package Lcc.PayrollBatchService.model;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
 
 @Entity
 @Table (name="leaveRecords")
 public class EmployeeLeaveRecord {
-    public EmployeeLeaveRecord(LeaveRecordCompositeKey key, int commuted, LeaveType leaveType) {
-        this.key = key;
-        this.commuted = commuted;
-        this.leaveType = leaveType;
-    }
 
-    public LeaveRecordCompositeKey getKey() {
-        return key;
-    }
+    @Id
+    private Integer id;
 
-    public void setKey(LeaveRecordCompositeKey key) {
-        this.key = key;
-    }
+    private double leaveRate = 2;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    @Enumerated(EnumType.STRING)
+    private LeaveType leaveType;
+    @Enumerated(EnumType.STRING)
+    private LeaveStatus leaveStatus;
 
-    public EmployeeLeaveRecord() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 
-    public int getCommuted() {
-        return commuted;
-    }
 
-    public void setCommuted(int commuted) {
-        this.commuted = commuted;
-    }
 
-    @EmbeddedId
-    private LeaveRecordCompositeKey key;
-    private int commuted;
-    private  LeaveType leaveType;
 
-    public LeaveType getLeaveType() {
-        return leaveType;
-    }
-    public void setLeaveType(LeaveType leaveType) {
-        this.leaveType = leaveType;
-    }
 }
