@@ -3,7 +3,7 @@ package Lcc.PayrollBatchService.controller;
 import Lcc.PayrollBatchService.model.Employee;
 import Lcc.PayrollBatchService.service.EmployeeService;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +12,9 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/employees")
-@RequiredArgsConstructor
 public class EmployeeController {
-
-    private final EmployeeService employeeService;
+  @Autowired
+    private  EmployeeService employeeService;
     @GetMapping("/employee/{employeeId}/process")
     public ResponseEntity<String> processEmployee(@PathVariable String employeeId){
         Optional<Employee> employee = employeeService.findById(employeeId);

@@ -4,7 +4,7 @@ import Lcc.PayrollBatchService.dto.PaySlipEmployeeData;
 import Lcc.PayrollBatchService.model.*;
 import Lcc.PayrollBatchService.payrollGenerator.PayrollPdfGenerator;
 import Lcc.PayrollBatchService.service.*;
-import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,11 +13,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-@Slf4j
+
 @Component
 public class EmployeeProcessor implements ItemProcessor<EmployeeOnPayroll, Payroll> {
     @Autowired
@@ -72,12 +71,12 @@ public class EmployeeProcessor implements ItemProcessor<EmployeeOnPayroll, Payro
         double fuelAllowance = position.getFuelAllowance() * basicSalary / 100;
         double riskAllowance = position.getRiskAllowance() * basicSalary / 100;
 
-        log.info("\nbasic salary: {}", basicSalary);
-        log.info("\nhousing allowance: {}" , housingAllowance);
-        System.out.println("education allowance: {}" +educationAllowance);
-        System.out.println("transport allowance: {}" +transportAllowance);
-        System.out.println("fuel allowance: {}" + fuelAllowance);
-        System.out.println("risk allowance: {}" + riskAllowance);
+        System.out.println("basic salary: "+ basicSalary);
+        System.out.println("housing allowance: " + housingAllowance);
+        System.out.println("education allowance: " +educationAllowance);
+        System.out.println("transport allowance: " +transportAllowance);
+        System.out.println("fuel allowance: " + fuelAllowance);
+        System.out.println("risk allowance: " + riskAllowance);
 
         double grossSalary  =  basicSalary
                             + housingAllowance
@@ -93,21 +92,21 @@ public class EmployeeProcessor implements ItemProcessor<EmployeeOnPayroll, Payro
 
         // pension deductions
         String pensionType = employeePensionService.findPensionTypeByEmployeeId(empId);
-        log.info("\n");
+
         double pensionDeduction = calculatePensionDeduction(empId, pensionType, basicSalary, grossSalary);
         System.out.println(pensionType+ " "+ pensionDeduction);
         if (pensionType.equalsIgnoreCase("napsa")) {
             double napsaYearToDate = getPensionYearToDate(empId, pensionType) ;
-            log.info("\n napsa year to year to date {}",napsaYearToDate);
+            System.out.println(" napsa year to year to date " +napsaYearToDate);
             napsaYearToDate =+ pensionDeduction;
-            log.info("\n napsa year to year to date + current pension amount {}", napsaYearToDate);
+            System.out.println("napsa year to year to date + current pension amount " + napsaYearToDate);
             payroll.setNapsaYearToDate(napsaYearToDate);
         }
         else {
             double pensionYearToDate = getPensionYearToDate(empId, pensionType);
-            log.info("\npension year to date {}",pensionYearToDate);
+            System.out.println("pension year to date " + pensionYearToDate);
             pensionYearToDate =+ pensionDeduction;
-            log.info("\npension to year to date + current pension amount {}", pensionYearToDate);
+            System.out.println("pension to year to date + current pension amount " + pensionYearToDate);
 
             payroll.setPensionYearToDate(pensionYearToDate);
         }

@@ -3,17 +3,17 @@ package Lcc.PayrollBatchService.service.implementation;
 import Lcc.PayrollBatchService.model.EmployeePayrollDeduction;
 import Lcc.PayrollBatchService.respository.EmployeePayrollDeductionRepository;
 import Lcc.PayrollBatchService.service.EmployeePayrollDeductionService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class EmployeePayrollDeductionServiceImpl implements EmployeePayrollDeductionService {
 
-    private final EmployeePayrollDeductionRepository employeePayrollDeductionRepository;
+    @Autowired
+    private  EmployeePayrollDeductionRepository employeePayrollDeductionRepository;
     @Override
     public void add(EmployeePayrollDeduction employeePayrollDeduction) {
         employeePayrollDeductionRepository.save(employeePayrollDeduction);

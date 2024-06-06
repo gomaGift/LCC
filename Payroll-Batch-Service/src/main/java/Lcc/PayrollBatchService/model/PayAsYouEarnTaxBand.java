@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "payAsYouEarnTaxBands")
+@Table(name = "pay_as_you_earn_tax_bands")
 public class PayAsYouEarnTaxBand {
     public PayAsYouEarnCompositeKey getKey() {
         return key;

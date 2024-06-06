@@ -1,8 +1,6 @@
 package Lcc.PayrollBatchService.model;
 
 import jakarta.persistence.Embeddable;
-
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;

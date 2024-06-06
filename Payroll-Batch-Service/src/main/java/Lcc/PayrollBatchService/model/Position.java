@@ -1,6 +1,4 @@
 package Lcc.PayrollBatchService.model;
-
-
 import jakarta.persistence.*;
 
 @Entity

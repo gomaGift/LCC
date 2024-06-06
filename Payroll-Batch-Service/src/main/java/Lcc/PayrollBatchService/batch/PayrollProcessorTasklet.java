@@ -53,7 +53,7 @@ public class PayrollProcessorTasklet implements Tasklet {
             List<EmployeePayrollDeduction> employeePayrollDeductions = employeePayrollDeductionService.findAllDeductionsByEmployeeNumberAndDate(payroll.getKey().getEmployeeId(), payroll.getKey().getPaymentDate());
 
             byte[] payrollBytes =  pdfGenerator.generatePayroll(payroll, employeePayrollDeductions, empInfo, empFullname);
-            emailService.sendMail(payrollBytes, employeePersonalData.getEmail(), empFullname);
+//            emailService.sendMail(payrollBytes, employeePersonalData.getEmail(), empFullname);
 //            emailService.sendMail(payrollBytes, "Bank email", empFullname); send payroll to employee Bank
 
         });

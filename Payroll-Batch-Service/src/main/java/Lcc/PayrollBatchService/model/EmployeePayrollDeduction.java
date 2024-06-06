@@ -4,23 +4,53 @@ import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 
 @Entity
-@Data
-@NoArgsConstructor
-
 public class EmployeePayrollDeduction {
-    
+
+    public EmployeePayrollDeduction() {
+    }
+
     @EmbeddedId
     private EmpDeductionCompositeKey key;
     private double percentageDeduction ;
     private double amount;
+
+    public EmpDeductionCompositeKey getKey() {
+        return key;
+    }
+
+    public void setKey(EmpDeductionCompositeKey key) {
+        this.key = key;
+    }
+
+    public double getPercentageDeduction() {
+        return percentageDeduction;
+    }
+
+    public void setPercentageDeduction(double percentageDeduction) {
+        this.percentageDeduction = percentageDeduction;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public Date getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Date lastModified) {
+        this.lastModified = lastModified;
+    }
 
     @Temporal(TemporalType.DATE)
     @UpdateTimestamp

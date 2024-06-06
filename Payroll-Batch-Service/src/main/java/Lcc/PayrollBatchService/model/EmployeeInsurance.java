@@ -1,13 +1,51 @@
 package Lcc.PayrollBatchService.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+
 
 import java.time.LocalDate;
 
 @Entity
-@Data
 public class EmployeeInsurance {
+    public EmpInsuranceCompositeKey getId() {
+        return id;
+    }
+
+    public void setId(EmpInsuranceCompositeKey id) {
+        this.id = id;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Insurance getInsurance() {
+        return insurance;
+    }
+
+    public void setInsurance(Insurance insurance) {
+        this.insurance = insurance;
+    }
+
+    public LocalDate getDateStarted() {
+        return dateStarted;
+    }
+
+    public void setDateStarted(LocalDate dateStarted) {
+        this.dateStarted = dateStarted;
+    }
+
+    public LocalDate getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(LocalDate dateEnd) {
+        this.dateEnd = dateEnd;
+    }
 
     @EmbeddedId
     private EmpInsuranceCompositeKey id;

@@ -20,7 +20,7 @@ public class SchedulerConfig {
     private JobLauncher jobLauncher;
 
 //   @Scheduled(fixedDelay = 2000, initialDelay = 1000) // for test purposes
-     @Scheduled(cron = "0 59 3 * * *") // runs every 15th day of the month
+     @Scheduled(cron = "0 32 10 * * *") // runs every 15th day of the month
     public void scheduleJob() throws Exception {
 
         jobLauncher
